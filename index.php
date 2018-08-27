@@ -50,7 +50,7 @@ $letter = [
 
 $tool = new Tool();
 $brand = $tool->read_csv_lines('brands.csv');
-//ksort($brand);
+ksort($brand);
 
 
 foreach ($brand as $k=>$v) {
