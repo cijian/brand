@@ -74,7 +74,7 @@ if($filesize > 1024*1024*10){
     $brand = $tool->read_csv_lines($brandCvs,4096);
 }
 
-var_dump($brand);exit;
+
 ksort($brand);
 
 
