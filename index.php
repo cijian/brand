@@ -48,8 +48,33 @@ $letter = [
     'Z' => [],
 ];
 
+$brandCvs = 'brands.csv';
 $tool = new Tool();
-$brand = $tool->read_csv_lines('brands.csv');
+
+$filesize = filesize($brandCvs);
+$brand = [];
+
+//设置大于 10M才分段读取吧
+if($filesize > 1024*1024*10){
+    $start = 0;
+    $line = 10;
+
+    while (($brands = $tool->read_csv_lines($brandCvs,4096,$start,$line)) != false){
+        $brand =  array_merge($brand,$brands);
+
+        if (empty($brands) || count($brands) <$line){
+            break;
+        }
+
+        $start = $line + $start;
+        echo $start;
+    }
+
+}else{
+    $brand = $tool->read_csv_lines($brandCvs,4096);
+}
+
+var_dump($brand);exit;
 ksort($brand);
 
 
